@@ -1,22 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Inventario de Accesorios</title>
-  <link rel="stylesheet" href="estilo.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="estilo.css" />
+  <link rel="icon" href="logo.jpg" type="image/png" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <style>
+    /* Opcional: transición para que la ocultación se vea más suave */
+    .secciones-nav {
+      transition: opacity 0.3s ease, height 0.3s ease;
+      overflow: hidden;
+    }
+    .secciones-nav.oculto {
+      opacity: 0;
+      height: 0;
+      pointer-events: none;
+      user-select: none;
+    }
+  </style>
 </head>
 <body>
   <header class="animate__animated animate__fadeInDown">
-    <h1>Inventario de Accesorios</h1>
-    <input type="text" id="buscador" placeholder="Buscar por nombre, marca o modelo...">
-    <nav class="secciones-nav">
-      <button onclick="mostrarSeccion('audifonos')">Audífonos</button>
-      <button onclick="mostrarSeccion('cables-usb')">Cables USB</button>
-      <button onclick="mostrarSeccion('apple')">Apple</button>
-      <button onclick="mostrarSeccion('jbl')">JBL</button>
-      <button onclick="mostrarSeccion('skullcandy')">Skullcandy</button>
+    <h1>Inventario de Pantallas</h1>
+    <input
+      type="text"
+      id="buscador"
+      placeholder="Buscar por nombre, marca o modelo..." />
+    <nav class="secciones-nav" id="navSecciones">
+   
+ 
       <button onclick="mostrarSeccion('pantallas-iphone')">Pantallas iPhone</button>
       <button onclick="mostrarSeccion('pantallas-samsung')">Pantallas Samsung</button>
       <button onclick="mostrarSeccion('pantallas-motorola')">Pantallas Motorola</button>
@@ -30,75 +48,56 @@
       <button onclick="mostrarSeccion('pantallas-zte')">Pantallas ZTE</button>
     </nav>
   </header>
-  <main class="inventario-container animate__animated animate__fadeInUp">
-    <!-- AUDÍFONOS -->
-    <section class="marca audifonos" id="audifonos">
-      <h2 class="animate__animated animate__fadeInLeft">Samsung</h2>
-      <div class="categoria">
-        <h3 class="animate__animated animate__fadeInRight">Audífonos Diadema</h3>
-        <div class="producto">
-          <img src="image copy.png" alt="Samsung Diadema AKG Y500" class="animate__animated animate__zoomIn">
-          <h4>AKG Y500</h4>
-          <p>Precio: $1,200</p>
-          <p>Bluetooth, 20h batería, colores: negro, azul</p>
-        </div>
-      </div>
-      <div class="categoria">
-        <h3>Audífonos In-Ear (Earbuds)</h3>
-        <div class="producto">
-          <img src="image copy 2.png" alt="Samsung Galaxy Buds Pro" class="animate__animated animate__zoomIn">
-          <h4>Bluetooth 5.0 color negro</h4>
-          <p>Precio: $250</p>
-          <p>Cancelación de ruido, 18h batería, colores: negro, plata</p>
-        </div>
-      </div>
-      <div class="categoria">
-        <h3>Audífonos de Oreja</h3>
-        <div class="producto">
-          <img src="image copy 3.png" alt="Samsung Level On" class="animate__animated animate__zoomIn">
-          <h4>Level On</h4>
-          <p>Precio: $1,800</p>
-          <p>Alámbricos, sonido premium, color: negro</p>
-        </div>
-    <!-- Sección de cargadores -->
-    <section class="marca">
 
-      </div>
-      <div class="categoria">
-        <h3>iPhone (Lightning)</h3>
-        <div class="producto">
-          <img src="image copy 6.png" alt="Cargador iPhone Lightning">
-          <h4>Cargador iPhone Lightning 2.0A</h4>
-          <p>Precio: $80</p>
-          <p>Voltaje: 2.0A | Compatible: iPhone, iPad, iPod</p>
-        </div>
-      </div>
-      <div class="categoria">
-        <h3>Entrada V8</h3>
-        <div class="producto">
-          <img src="image copy 7.png" alt="Cargador Micro USB">
-          <h4>Cargador completo de V8 2.0A</h4>
-          <p>Precio: $80</p>
-          <p>Voltaje: 2.0A | Compatible: Motorola, LG, Samsung antiguos</p>
-        </div>
-      </div>
-            <div class="categoria">
-        <h3>Entrada C</h3>
-        <div class="producto">
-          <img src="image copy 9.png" alt="Cargador Micro USB">
-          <h4>Cargador completo tipo C 2.0A</h4>
-          <p>Precio: $80</p>
-          <p>Voltaje: 2.0A | Compatible: Motorola, LG, Samsung antiguos</p>
-        </div>
-      </div>
-    </section>
+
+<script>
+  const buscador = document.getElementById("buscador");
+  const navSecciones = document.getElementById("navSecciones");
+
+  // Oculta los botones al escribir en el buscador
+  buscador.addEventListener("input", () => {
+    navSecciones.classList.toggle("oculto", buscador.value.trim().length > 0);
+  });
+
+  let ultimoScroll = window.scrollY;
+  let scrollTimeout;
+
+  window.addEventListener("scroll", () => {
+    const scrollActual = window.scrollY;
+
+    // Si el usuario hace scroll hacia abajo, ocultar
+    if (scrollActual > ultimoScroll) {
+      navSecciones.classList.add("oculto");
+    }
+
+    // Si se detiene o sube, mostrar con retardo para evitar parpadeos
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      if (scrollActual <= ultimoScroll) {
+        navSecciones.classList.remove("oculto");
+      }
+      ultimoScroll = scrollActual;
+    }, 150); // tiempo en milisegundos (ajustable)
+  });
+
+  function mostrarSeccion(id) {
+    alert("Mostrando productos de " + id);
+  }
+</script>
+
+
+
+
+
     <!-- Pantallas Honor -->
     <section class="brand-section" id="pantallas-honor">
       <h2>Pantallas Honor</h2>
       <div class="products-grid">
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Honor_logo.svg" alt="Logo Honor" class="brand-logo" /><p class="product-name">HUAWEI HONOR 10 LITE</p><p class="product-price">$280</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Honor_logo.svg" alt="Logo Honor" class="brand-logo" /><p class="product-name">HUAWEI HONOR 8 A</p><p class="product-price">$280</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Honor_logo.svg" alt="Logo Honor" class="brand-logo" /><p class="product-name">HUAWEI HONOR 8X</p><p class="product-price">$280</p></article>
+      <article class="product-card" style="position:relative;overflow:hidden;"><div style="position:absolute;top:10px;left:10px;background:red;color:white;padding:5px 10px;font-weight:bold;font-size:14px;border-radius:5px;z-index:1;animation:pulse 1.2s infinite;">AGOTADO</div><img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Honor_logo.svg" alt="Logo Honor" class="brand-logo" /><p class="product-name">HUAWEI HONOR 10 LITE</p><p class="product-price">$280</p></article>
+      <article class="product-card" style="position:relative;overflow:hidden;"><div style="position:absolute;top:10px;left:10px;background:red;color:white;padding:5px 10px;font-weight:bold;font-size:14px;border-radius:5px;z-index:1;animation:pulse 1.2s infinite;">AGOTADO</div><img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Honor_logo.svg" alt="Logo Honor" class="brand-logo" /><p class="product-name">HUAWEI HONOR 8 A</p><p class="product-price">$280</p></article>
+      <article class="product-card" style="position:relative;overflow:hidden;"><div style="position:absolute;top:10px;left:10px;background:red;color:white;padding:5px 10px;font-weight:bold;font-size:14px;border-radius:5px;z-index:1;animation:pulse 1.2s infinite;">AGOTADO</div><img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Honor_logo.svg" alt="Logo Honor" class="brand-logo" /><p class="product-name">HUAWEI HONOR 8X</p><p class="product-price">$280</p></article>
+      <style>@keyframes pulse{0%{transform:scale(1);opacity:1;}50%{transform:scale(1.1);opacity:0.7;}100%{transform:scale(1);opacity:1;}}</style>
+
       </div>
     </section>
     <!-- Pantallas Hisense -->
@@ -114,23 +113,25 @@
     <section class="brand-section" id="pantallas-xiaomi">
       <h2>Pantallas Xiaomi</h2>
       <div class="products-grid">
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI NOTE 9</p><p class="product-price">$280</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI NOTE 8</p><p class="product-price">$250</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI NOTE 7</p><p class="product-price">$280</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI RENO 7 OLED</p><p class="product-price">$850</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI RENO 6 LITE OLED</p><p class="product-price">$680</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI RENO 5 LITE OLED</p><p class="product-price">$680</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI RENO 5 LITE INCELL</p><p class="product-price">$290</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI 12</p><p class="product-price">$350</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI 10C</p><p class="product-price">$280</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI 10 A</p><p class="product-price">$270</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI 9 A</p><p class="product-price">$270</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI 9T</p><p class="product-price">$280</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI 9 A C/M</p><p class="product-price">$290</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">POCO M4 PRO</p><p class="product-price">$260</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">POCO F3</p><p class="product-price">$280</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">POCO M3</p><p class="product-price">$290</p></article>
-        <article class="product-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">POCO X3 PRO</p><p class="product-price">$430</p></article>
+        <article class="product-card" style="position:relative;overflow:hidden;"><div style="position:absolute;top:10px;left:10px;background:red;color:white;padding:5px 10px;font-weight:bold;font-size:14px;border-radius:5px;z-index:1;animation:pulse 1.2s infinite;">AGOTADO</div><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI NOTE 9</p><p class="product-price">$280</p></article>
+<article class="product-card" style="position:relative;overflow:hidden;"><div style="position:absolute;top:10px;left:10px;background:red;color:white;padding:5px 10px;font-weight:bold;font-size:14px;border-radius:5px;z-index:1;animation:pulse 1.2s infinite;">AGOTADO</div><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI NOTE 8</p><p class="product-price">$250</p></article>
+
+
+        <article class="product-card"   ><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI NOTE 7</p><p class="product-price">$280</p></article>
+        <article class="product-card"   ><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI RENO 7 OLED</p><p class="product-price">$850</p></article>
+        <article class="product-card"   ><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI RENO 6 LITE OLED</p><p class="product-price">$680</p></article>
+        <article class="product-card"   ><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI RENO 5 LITE OLED</p><p class="product-price">$680</p></article>
+        <article class="product-card"   ><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI RENO 5 LITE INCELL</p><p class="product-price">$290</p></article>
+        <article class="product-card"   ><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI 12</p><p class="product-price">$350</p></article>
+        <article class="product-card"   ><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI 10C</p><p class="product-price">$280</p></article>
+        <article class="product-card">  <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI 10 A</p><p class="product-price">$270</p></article>
+        <article class="product-card">  <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI 9 A</p><p class="product-price">$270</p></article>
+        <article class="product-card">  <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI 9T</p><p class="product-price">$280</p></article>
+        <article class="product-card">  <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">REDMI 9 A C/M</p><p class="product-price">$290</p></article>
+        <article class="product-card">  <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">POCO M4 PRO</p><p class="product-price">$260</p></article>
+        <article class="product-card">  <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">POCO F3</p><p class="product-price">$280</p></article>
+        <article class="product-card">  <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">POCO M3</p><p class="product-price">$290</p></article>
+        <article class="product-card">  <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg" alt="Logo Xiaomi" class="brand-logo" /><p class="product-name">POCO X3 PRO</p><p class="product-price">$430</p></article>
       </div>
     </section>
     <!-- Pantallas Realme -->
@@ -171,124 +172,6 @@
       </div>
     </section>
     </section>
-      </div>
-    </section>
-    <!-- Sección de cables USB -->
-    <section class="marca">
-      <h2 id="cables-usb">Cables USB</h2>
-      <div class="categoria">
-        <h3>USB-C</h3>
-        <div class="producto">
-          <img src="image copy 4.png" alt="Cable USB-C 1m">
-          <h4>Cable USB-C 1 metro para carga de 2.1</h4>
-          <p>Precio: $50</p>
-          <p>Compatible: Samsung, Xiaomi, Motorola, etc. Colores: blanco, negro</p>
-        </div>
-        <div class="producto">
-          <img src="image copy 5.png" alt="Cable USB-C 2m">
-          <h4>Cable USB-C 2 metros para carga de 2.1</h4>
-          <p>Precio: $180</p>
-          <p>Compatible: Samsung, Xiaomi, Motorola, etc. Colores: blanco, negro</p>
-        </div>
-      </div>
-      <div class="categoria">
-        <h3>USB-A a Lightning (iPhone)</h3>
-        <div class="producto">
-          <img src="cable_usba_lightning_1m.jpg" alt="Cable USB-A a Lightning 1m">
-          <h4>Cable USB-A a Lightning 1 metro</h4>
-          <p>Precio: $150</p>
-          <p>Compatible: iPhone, iPad, iPod. Colores: blanco</p>
-        </div>
-        <div class="producto">
-          <img src="cable_usba_lightning_2m.jpg" alt="Cable USB-A a Lightning 2m">
-          <h4>Cable USB-A a Lightning 2 metros</h4>
-          <p>Precio: $220</p>
-          <p>Compatible: iPhone, iPad, iPod. Colores: blanco</p>
-        </div>
-      </div>
-      <div class="categoria">
-        <h3>USB-A a Entrada Universal (Micro USB)</h3>
-        <div class="producto">
-          <img src="cable_usba_micro_1m.jpg" alt="Cable USB-A a Micro USB 1m">
-          <h4>Cable USB-A a Micro USB 1 metro</h4>
-          <p>Precio: $100</p>
-          <p>Compatible: Motorola, LG, Samsung antiguos. Colores: negro, blanco</p>
-        </div>
-        <div class="producto">
-          <img src="cable_usba_micro_2m.jpg" alt="Cable USB-A a Micro USB 2m">
-          <h4>Cable USB-A a Micro USB 2 metros</h4>
-          <p>Precio: $150</p>
-          <p>Compatible: Motorola, LG, Samsung antiguos. Colores: negro, blanco</p>
-        </div>
-      </div>
-    </section>
-    <section class="marca">
-      <h2 id="apple">Apple</h2>
-      <div class="categoria">
-        <h3>Audífonos In-Ear (AirPods)</h3>
-        <div class="producto">
-          <img src="airpods_pro.jpg" alt="AirPods Pro">
-          <h4>AirPods Pro</h4>
-          <p>Precio: $4,500</p>
-          <p>Cancelación de ruido, 24h batería, color: blanco</p>
-        </div>
-        <div class="producto">
-          <img src="airpods_3gen.jpg" alt="AirPods 3ra Gen">
-          <h4>AirPods 3ra Gen</h4>
-          <p>Precio: $3,200</p>
-          <p>Resistentes al agua, 20h batería, color: blanco</p>
-        </div>
-      </div>
-      <div class="categoria">
-        <h3>Audífonos Diadema</h3>
-        <div class="producto">
-          <img src="airpods_max.jpg" alt="AirPods Max">
-          <h4>AirPods Max</h4>
-          <p>Precio: $12,000</p>
-          <p>Cancelación de ruido, 20h batería, colores: gris, azul, rosa</p>
-        </div>
-      </div>
-    </section>
-    <section class="marca">
-      <h2 id="jbl">JBL</h2>
-      <div class="categoria">
-        <h3>Audífonos Diadema</h3>
-        <div class="producto">
-          <img src="jbl_tune500.jpg" alt="JBL Tune 500">
-          <h4>Tune 500</h4>
-          <p>Precio: $650</p>
-          <p>Alámbricos, colores: negro, azul, rosa</p>
-        </div>
-      </div>
-      <div class="categoria">
-        <h3>Audífonos In-Ear</h3>
-        <div class="producto">
-          <img src="jbl_tune125.jpg" alt="JBL Tune 125TWS">
-          <h4>Tune 125TWS</h4>
-          <p>Precio: $1,200</p>
-          <p>Bluetooth, 32h batería, colores: negro, blanco</p>
-        </div>
-      </div>
-    </section>
-    <section class="marca">
-      <h2 id="skullcandy">Skullcandy</h2>
-      <div class="categoria">
-        <h3>Audífonos Diadema</h3>
-        <div class="producto">
-          <img src="skullcandy_crusher.jpg" alt="Skullcandy Crusher">
-          <h4>Crusher</h4>
-          <p>Precio: $2,000</p>
-          <p>Bass Sensation, 40h batería, colores: negro, rojo</p>
-        </div>
-      </div>
-      <div class="categoria">
-        <h3>Audífonos In-Ear</h3>
-        <div class="producto">
-          <img src="skullcandy_dime.jpg" alt="Skullcandy Dime">
-          <h4>Dime</h4>
-          <p>Precio: $600</p>
-          <p>Bluetooth, 12h batería, colores: negro, azul</p>
-        </div>
       </div>
     </section>
     <!-- Pantallas iPhone -->
