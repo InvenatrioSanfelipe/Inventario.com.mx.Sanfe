@@ -1,0 +1,203 @@
+/* Botones de navegación de secciones */
+.secciones-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 18px 0 10px 0;
+}
+
+.secciones-nav button {
+  background: linear-gradient(90deg, #007BFF 60%, #00c6ff 100%);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: transform 0.18s, box-shadow 0.18s, background 0.3s;
+  outline: none;
+}
+
+.secciones-nav button:hover, .secciones-nav button:focus {
+  background: linear-gradient(90deg, #0056b3 60%, #007BFF 100%);
+  transform: scale(1.07);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+}
+
+@media (max-width: 600px) {
+  .secciones-nav {
+    gap: 7px;
+  }
+  .secciones-nav button {
+    padding: 8px 12px;
+    font-size: 0.95rem;
+  }
+}
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+  padding-bottom: 40px;
+}
+
+header {
+  background-color: #222;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header h1 {
+  margin-bottom: 10px;
+}
+
+header input[type="text"] {
+  padding: 10px;
+  width: 60%;
+  max-width: 400px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 10px;
+}
+
+header button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+header button:hover {
+  background-color: #666;
+}
+
+/* Contenedor principal */
+.inventario-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Secciones de marca */
+.marca {
+  margin-bottom: 40px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.marca h2 {
+  margin-bottom: 15px;
+  border-left: 5px solid #007BFF;
+  padding-left: 10px;
+  color: #007BFF;
+}
+
+/* Categorías de productos */
+.categoria {
+  margin-bottom: 20px;
+}
+
+.categoria h3 {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* Estilo individual de cada producto */
+.producto {
+  background: #fdfdfd;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: transform 0.2s ease;
+}
+
+.producto:hover {
+  transform: scale(1.02);
+}
+
+.producto img {
+  width: 90px;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Estilo para tarjetas de pantallas */
+.brand-section {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 40px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.brand-section h2 {
+  color: #222;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #007BFF;
+  padding-bottom: 5px;
+}
+
+/* Grid de productos tipo tarjeta */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 15px;
+}
+
+/* Cada tarjeta */
+.product-card {
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.product-card img.brand-logo {
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+.product-name {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.product-price {
+  color: #007BFF;
+  font-size: 15px;
+  font-weight: bold;
+}
