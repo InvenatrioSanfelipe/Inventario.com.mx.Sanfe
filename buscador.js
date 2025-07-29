@@ -26,3 +26,9 @@ document.getElementById('buscador').addEventListener('input', function() {
     seccion.style.display = seccionVisible || filtro === '' ? '' : 'none';
   });
 });
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.onkeydown = function(e) {
+  if(e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S' || e.key === 'c' || e.key === 'C' || e.key === 'Shift')) {
+    return false; // bloquea Ctrl+U, Ctrl+S, Ctrl+C y Shift
+  }
+}
