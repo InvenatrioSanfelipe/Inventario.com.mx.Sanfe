@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentación del Producto</title>
+  <link rel="stylesheet" href="estilo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    body {
+      min-height:100vh;
+      margin:0;
+      background:linear-gradient(120deg,#2d8cf0 0%,#57e6e6 100%);
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Segoe UI',Arial,sans-serif;
+      overflow:hidden;
+    }
+    .presentacion-card {
+      background:rgba(255,255,255,0.97);
+      border-radius:22px;
+      box-shadow:0 8px 32px #0003,0 1.5px 8px #2d8cf0a0;
+      padding:38px 32px 32px 32px;
+      max-width:400px;
+      text-align:center;
+      animation:fadeInDown 1s;
+      position:relative;
+    }
+    @keyframes fadeInDown {
+      from {transform:translateY(-60px);opacity:0;}
+      to {transform:translateY(0);opacity:1;}
+    }
+    .presentacion-logo {
+      width:80px;height:80px;
+      margin:0 auto 18px auto;
+      border-radius:50%;
+      background:linear-gradient(135deg,#2d8cf0 60%,#57e6e6 100%);
+      box-shadow:0 2px 8px #2d8cf0a0;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .presentacion-logo img {
+      width:54px;height:54px;object-fit:contain;
+    }
+    .presentacion-titulo {
+      font-size:2em;
+      font-weight:700;
+      color:#2d8cf0;
+      margin-bottom:12px;
+      letter-spacing:1px;
+    }
+    .presentacion-desc {
+      font-size:1.1em;
+      color:#333;
+      margin-bottom:22px;
+    }
+    .presentacion-btn {
+      display:inline-block;
+      padding:12px 32px;
+      background:linear-gradient(90deg,#2d8cf0,#57e6e6);
+      color:#fff;
+      font-weight:bold;
+      border:none;
+      border-radius:8px;
+      font-size:1.1em;
+      box-shadow:0 2px 8px #2d8cf0a0;
+      cursor:pointer;
+      transition:background 0.2s,transform 0.2s;
+      animation:botonPulse 1.2s infinite alternate;
+      text-decoration:none;
+    }
+    @keyframes botonPulse {
+      from {transform:scale(1);}
+      to {transform:scale(1.04);}
+    }
+    .presentacion-btn:hover {
+      background:linear-gradient(90deg,#57e6e6,#2d8cf0);
+      transform:scale(1.07);
+    }
+  </style>
+</head>
+<body>
+  <div class="presentacion-card animate__animated animate__fadeIn">
+    <div class="presentacion-logo">
+      <img src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png" alt="Logo Producto" />
+    </div>
+    <div class="presentacion-titulo">Inventario de Accesorios</div>
+    <div class="presentacion-desc">Bienvenido al sistema de inventario visual y moderno para pantallas, audífonos, cables y más. Organiza y consulta tu stock de manera fácil y rápida.</div>
+    <a href="inicio.html" class="presentacion-btn">Entrar al sistema</a>
+  </div>
+</body>
+</html>
